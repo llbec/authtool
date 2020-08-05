@@ -1,0 +1,23 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+output/
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# project file
+*.user
+
+#OSX
+*.DS_Store
+*.swp
+
+#VSCode
+.vscode/
+
+#Key file
+.key
