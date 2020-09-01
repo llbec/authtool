@@ -85,6 +85,28 @@ extern char* ReadPCID(char* p0);
 
 extern char* ReadSig(char* p0);
 
+extern char* InviteCode(GoInt64 p0, GoInt64 p1);
+
+extern GoInt64 InvitePhone(char* p0);
+
+extern GoInt64 InviteIndex(char* p0);
+
+extern char* GetUserCode(char* p0);
+
+extern char* UpdateUserCode(char* p0, GoInt64 p1);
+
+extern char* SignUserCode(char* p0);
+
+extern GoUint8 VerifyUserCode(char* p0);
+
+extern GoInt64 GetLimit(char* p0);
+
+extern char* GetCPU(char* p0);
+
+extern GoInt64 GetPhoneNum(char* p0);
+
+extern GoInt64 GetIndex(char* p0);
+
 #ifdef __cplusplus
 }
 #endif

@@ -17,17 +17,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    dialog.cpp
+    dialog.cpp \
+    mainwindow.cpp
 
 HEADERS += \
-    dialog.h
+    dialog.h \
+    mainwindow.h
 
 FORMS += \
-    dialog.ui
+    dialog.ui \
+    mainwindow.ui
+
+# 子工程
+include ($$PWD/utils/utils.pri)
 
 # 附加包含路径
 INCLUDEPATH += \
-        $$PWD/libs/auth
+        $$PWD/libs/auth \
+        $$PWD/libs/inviter \
+        $$PWD/libs/authlog
 
 # 从文件读取版本号
 #CAT_VERSION = $$cat($$PWD/version)
@@ -71,12 +79,20 @@ win32 {
 
     # 复制依赖库
     WIN_AUTH_SRC = $$PWD/../libs/auth/*.dll
+    WIN_INVITER_SRC = $$PWD/../libs/inviter/*.dll
+    WIN_AUTHLOG_SRC = $$PWD/../libs/authlog/*.dll
     WIN_DST = $$DESTDIR
 
     WIN_AUTH_SRC ~= s,/,\\,g
+    WIN_INVITER_SRC ~= s,/,\\,g
+    WIN_AUTHLOG_SRC ~= s,/,\\,g
     WIN_DST ~= s,/,\\,g
 
     QMAKE_POST_LINK += $$quote($$QMAKE_COPY $$WIN_AUTH_SRC $$WIN_DST$$escape_expand(\n\t))
+    QMAKE_POST_LINK += $$quote($$QMAKE_COPY $$WIN_INVITER_SRC $$WIN_DST$$escape_expand(\n\t))
+    QMAKE_POST_LINK += $$quote($$QMAKE_COPY $$WIN_AUTHLOG_SRC $$WIN_DST$$escape_expand(\n\t))
+
+    RC_FILE = $$PWD/res/authorize.rc
 }
 
 #ROOT_DIR = $$PWD/..
