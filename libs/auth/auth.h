@@ -68,44 +68,26 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-
 extern char* GetPCID();
-
-extern GoInt64 StringToStamp(char* p0);
-
-extern char* StampToString(GoInt64 p0);
-
-extern char* Sign(char* p0, GoInt64 p1);
-
-extern GoUint8 Verify(char* p0);
-
-extern GoInt64 ReadLimit(char* p0);
-
-extern char* ReadPCID(char* p0);
-
-extern char* ReadSig(char* p0);
-
-extern char* InviteCode(GoInt64 p0, GoInt64 p1);
-
-extern GoInt64 InvitePhone(char* p0);
-
-extern GoInt64 InviteIndex(char* p0);
-
-extern char* GetUserCode(char* p0);
-
-extern char* UpdateUserCode(char* p0, GoInt64 p1);
-
-extern char* SignUserCode(char* p0);
-
-extern GoUint8 VerifyUserCode(char* p0);
-
-extern GoInt64 GetLimit(char* p0);
-
-extern char* GetCPU(char* p0);
-
-extern GoInt64 GetPhoneNum(char* p0);
-
-extern GoInt64 GetIndex(char* p0);
+extern GoInt64 StringToStamp(char* s);
+extern char* StampToString(GoInt64 stamp);
+extern char* Sign(char* s, GoInt64 stamp);
+extern GoUint8 Verify(char* s);
+extern GoInt64 ReadLimit(char* s);
+extern char* ReadPCID(char* s);
+extern char* ReadSig(char* s);
+extern char* InviteCode(GoInt64 no, GoInt64 idx);
+extern char* VerifyInvite(char* c);
+extern GoInt64 InvitePhone(char* c);
+extern GoInt64 InviteIndex(char* c);
+extern char* GetUserCode(char* c);
+extern char* UpdateUserCode(char* c, GoInt64 lmt);
+extern char* SignUserCode(char* c);
+extern GoUint8 VerifyUserCode(char* c);
+extern GoInt64 GetLimit(char* c);
+extern char* GetCPU(char* c);
+extern GoInt64 GetPhoneNum(char* c);
+extern GoInt64 GetIndex(char* c);
 
 #ifdef __cplusplus
 }

@@ -68,9 +68,7 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-
-extern char* MakeInviter(GoInt64 p0);
-
+extern char* MakeInviter(GoInt64 num);
 extern char* ReadAll();
 
 #ifdef __cplusplus
