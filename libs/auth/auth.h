@@ -83,7 +83,7 @@ extern GoInt64 InviteIndex(char* c);
 extern char* GetUserCode(char* c);
 extern char* UpdateUserCode(char* c, GoInt64 lmt);
 extern char* SignUserCode(char* c);
-extern GoUint8 VerifyUserCode(char* c);
+extern GoUint8 VerifyUserCode(char* c, GoUint8 b);
 extern GoInt64 GetLimit(char* c);
 extern char* GetCPU(char* c);
 extern GoInt64 GetPhoneNum(char* c);

@@ -19,7 +19,7 @@ typedef char* (*funcPtrUpdateUserCode)(char* p0, GoInt64 p1);
 typedef GoInt64 (*funcPtrStringToStamp)(char* p0);
 typedef char* (*funcPtrStampToString)(GoInt64 p0);
 typedef char* (*funcPtrSignUserCode)(char* p0);
-typedef GoUint8 (*funcPtrVerifyUserCode)(char* p0);
+typedef GoUint8 (*funcPtrVerifyUserCode)(char* c, GoUint8 b);
 typedef GoInt64 (*funcPtrGetLimit)(char* p0);
 typedef char* (*funcPtrGetCPU)(char* p0);
 typedef GoInt64 (*funcPtrGetPhoneNum)(char* p0);

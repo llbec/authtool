@@ -81,7 +81,7 @@ void MainWindow::on_pushButton_clicked()
     QString sig = QString(SignUserCode(UpdateUserCode(baUser.data(), StringToStamp(baLmt.data()))));
     QByteArray basig = sig.toLatin1();
     char * cSig = basig.data();
-    if (VerifyUserCode(cSig)) {
+    if (VerifyUserCode(cSig, false)) {
         ui->text_auth->setText(sig);
         qint64 lmt = GetLimit(cSig);
         qint64 idx = GetIndex(cSig);
