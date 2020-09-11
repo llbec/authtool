@@ -20,10 +20,10 @@ typedef GoInt64 (*funcPtrStringToStamp)(char* p0);
 typedef char* (*funcPtrStampToString)(GoInt64 p0);
 typedef char* (*funcPtrSignUserCode)(char* p0);
 typedef GoUint8 (*funcPtrVerifyUserCode)(char* c, GoUint8 b);
-typedef GoInt64 (*funcPtrGetLimit)(char* p0);
-typedef char* (*funcPtrGetCPU)(char* p0);
-typedef GoInt64 (*funcPtrGetPhoneNum)(char* p0);
-typedef GoInt64 (*funcPtrGetIndex)(char* p0);
+typedef GoInt64 (*funcPtrGetLimitFromUCSig)(char* p0);
+typedef char* (*funcPtrGetCPUFromUCSig)(char* p0);
+typedef GoInt64 (*funcPtrGetPhoneFromUCSig)(char* p0);
+typedef GoInt64 (*funcPtrGetIndexFromUCSig)(char* p0);
 typedef char* (*funcPtrInviteCode)(GoInt64 p0, GoInt64 p1);
 
 //import inviter.dll
@@ -68,10 +68,10 @@ private:
     funcPtrStampToString StampToString;
     funcPtrSignUserCode SignUserCode;
     funcPtrVerifyUserCode VerifyUserCode;
-    funcPtrGetLimit GetLimit;
-    funcPtrGetCPU GetCPU;
-    funcPtrGetPhoneNum GetPhoneNum;
-    funcPtrGetIndex GetIndex;
+    funcPtrGetLimitFromUCSig GetLimitFromUCSig;
+    funcPtrGetCPUFromUCSig GetCPUFromUCSig;
+    funcPtrGetPhoneFromUCSig GetPhoneFromUCSig;
+    funcPtrGetIndexFromUCSig GetIndexFromUCSig;
     funcPtrInviteCode InviteCode;
 
     funcPtrMakeInviter MakeInviter;

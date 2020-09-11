@@ -68,26 +68,22 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-extern char* GetPCID();
+extern char* LastError();
 extern GoInt64 StringToStamp(char* s);
 extern char* StampToString(GoInt64 stamp);
-extern char* Sign(char* s, GoInt64 stamp);
-extern GoUint8 Verify(char* s);
-extern GoInt64 ReadLimit(char* s);
-extern char* ReadPCID(char* s);
-extern char* ReadSig(char* s);
 extern char* InviteCode(GoInt64 no, GoInt64 idx);
-extern char* VerifyInvite(char* c);
 extern GoInt64 InvitePhone(char* c);
 extern GoInt64 InviteIndex(char* c);
-extern char* GetUserCode(char* c);
+extern char* GetUserCode(GoInt64 p, GoInt64 n);
 extern char* UpdateUserCode(char* c, GoInt64 lmt);
 extern char* SignUserCode(char* c);
 extern GoUint8 VerifyUserCode(char* c, GoUint8 b);
-extern GoInt64 GetLimit(char* c);
-extern char* GetCPU(char* c);
-extern GoInt64 GetPhoneNum(char* c);
-extern GoInt64 GetIndex(char* c);
+extern GoInt64 GetLimitFromUCSig(char* c);
+extern char* GetCPUFromUCSig(char* c);
+extern GoInt64 GetPhoneFromUCSig(char* c);
+extern GoInt64 GetIndexFromUCSig(char* c);
+extern char* EncodeTryTime(GoInt64 p, GoInt64 n);
+extern GoInt64 DecodeTryTime(char* c, GoInt64 p, GoInt64 n);
 
 #ifdef __cplusplus
 }

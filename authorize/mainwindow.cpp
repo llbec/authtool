@@ -23,10 +23,10 @@ MainWindow::MainWindow(QWidget *parent) :
     StampToString = (funcPtrStampToString)GetProcAddress(hdll_auth, "StampToString");
     SignUserCode = (funcPtrSignUserCode)GetProcAddress(hdll_auth, "SignUserCode");
     VerifyUserCode = (funcPtrVerifyUserCode)GetProcAddress(hdll_auth, "VerifyUserCode");
-    GetLimit = (funcPtrGetLimit)GetProcAddress(hdll_auth, "GetLimit");
-    GetCPU = (funcPtrGetCPU)GetProcAddress(hdll_auth, "GetCPU");
-    GetPhoneNum = (funcPtrGetPhoneNum)GetProcAddress(hdll_auth, "GetPhoneNum");
-    GetIndex = (funcPtrGetIndex)GetProcAddress(hdll_auth, "GetIndex");
+    GetLimitFromUCSig = (funcPtrGetLimitFromUCSig)GetProcAddress(hdll_auth, "GetLimitFromUCSig");
+    GetCPUFromUCSig = (funcPtrGetCPUFromUCSig)GetProcAddress(hdll_auth, "GetCPUFromUCSig");
+    GetPhoneFromUCSig = (funcPtrGetPhoneFromUCSig)GetProcAddress(hdll_auth, "GetPhoneFromUCSig");
+    GetIndexFromUCSig = (funcPtrGetIndexFromUCSig)GetProcAddress(hdll_auth, "GetIndexFromUCSig");
     InviteCode = (funcPtrInviteCode)GetProcAddress(hdll_auth, "InviteCode");
 
     hdll_inviter = LoadLibraryA("inviter.dll");
@@ -78,19 +78,21 @@ void MainWindow::on_pushButton_clicked()
     QString slimit = ui->date_limit->text() + " 23:59:59";
     QByteArray baUser = ui->text_user->toPlainText().toLatin1();
     QByteArray baLmt = slimit.toLatin1();
-    QString sig = QString(SignUserCode(UpdateUserCode(baUser.data(), StringToStamp(baLmt.data()))));
-    QByteArray basig = sig.toLatin1();
-    char * cSig = basig.data();
+    char* nuc = UpdateUserCode(baUser.data(), StringToStamp(baLmt.data()));
+    char* cSig = SignUserCode(nuc);
+    ui->text_result->append(QString("new code is %1\nsig is: %2\n").arg(QString(nuc)).arg(QString(cSig)));
+    //QByteArray basig = sig.toLatin1();
+    // * cSig = basig.data();
     if (VerifyUserCode(cSig, false)) {
-        ui->text_auth->setText(sig);
-        qint64 lmt = GetLimit(cSig);
-        qint64 idx = GetIndex(cSig);
-        QString cpu = QString(GetCPU(cSig));
-        qint64 phone = GetPhoneNum(cSig);
-        ui->text_result->setText(QString("Success: sign %1 to date %2. invite num is %3(%4)").arg(cpu).arg(QString(StampToString(lmt))).arg(phone).arg(idx));
+        ui->text_auth->setText(QString(cSig));
+        qint64 lmt = GetLimitFromUCSig(cSig);
+        qint64 idx = GetIndexFromUCSig(cSig);
+        QString cpu = QString(GetCPUFromUCSig(cSig));
+        qint64 phone = GetPhoneFromUCSig(cSig);
+        ui->text_result->append(QString("Success: sign %1 to date %2. invite num is %3(%4)\n").arg(cpu).arg(QString(StampToString(lmt))).arg(phone).arg(idx));
         WriteSig(cSig);
     } else {
-        ui->text_result->setText("Sign failed!");
+        ui->text_result->append("Sign failed!]\n");
     }
 
 }
@@ -176,8 +178,8 @@ void MainWindow::on_pbtn_authlog_refresh_clicked()
         QString sigstr = QString(baSig);
         idoff += siglen;
         QStandardItem *standItem1 = new QStandardItem(tr("%1").arg(StampToString(signdate)));
-        QStandardItem *standItem2 = new QStandardItem(tr("%1").arg(StampToString(GetLimit(baSig.data()))));
-        QStandardItem *standItem3 = new QStandardItem(tr("%1").arg(GetPhoneNum(baSig.data())));
+        QStandardItem *standItem2 = new QStandardItem(tr("%1").arg(StampToString(GetLimitFromUCSig(baSig.data()))));
+        QStandardItem *standItem3 = new QStandardItem(tr("%1").arg(GetPhoneFromUCSig(baSig.data())));
         QStandardItem *standItem4 = new QStandardItem(tr("%1").arg(sigstr));
         standItemModel->setItem(i,0,standItem1);
         standItemModel->item(i,0)->setTextAlignment(Qt::AlignCenter);           //设置表格内容居中
